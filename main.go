@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/labstack/gommon/log"
@@ -35,9 +36,7 @@ func main() {
 		log.Print(err)
 	}
 
-	// using heap sort to sort the sequence instead of buit-in sort.Slice(any,func(i,i) bool{})
-	// since heap sort allocates less memory comparing to the built-in one
-	heapSortTopSequences(sequences)
+	sortSequencesByCount(sequences)
 
 	printHighestSequences(sequences)
 }
@@ -139,42 +138,17 @@ func getMaxSequences(sequencesCount int) int {
 	return sequencesCount
 }
 
-// heapSortTopSequences sorts the top sequences using heap sort algorithm.
-func heapSortTopSequences(arr []SequenceCount) {
-	heapSize := len(arr)
-	for i := heapSize/2 - 1; i >= 0; i-- {
-		heapify(arr, heapSize, i)
-	}
-	for i := heapSize - 1; i >= 0; i-- {
-		arr[0], arr[i] = arr[i], arr[0]
-		heapify(arr, i, 0)
-	}
-}
-
-// heapify performs heapification on a subtree rooted at index i.
-func heapify(arr []SequenceCount, n, i int) {
-	largest := i
-	left := 2*i + 1
-	right := 2*i + 2
-
-	if left < n && arr[left].Count < arr[largest].Count {
-		largest = left
-	}
-
-	if right < n && arr[right].Count < arr[largest].Count {
-		largest = right
-	}
-
-	if largest != i {
-		arr[i], arr[largest] = arr[largest], arr[i]
-		heapify(arr, n, largest)
-	}
-}
-
 // isFileFromStdin checks if the program is receiving input from stdin.
 func isFileFromStdin() bool {
 	if len(os.Args) > 1 {
 		return true
 	}
 	return false
+}
+
+// sortSequencesByCount gets all the sequences sorted by count in descending order
+func sortSequencesByCount(sequences []SequenceCount) {
+	sort.Slice(sequences, func(i, j int) bool {
+		return sequences[i].Count > sequences[j].Count
+	})
 }
