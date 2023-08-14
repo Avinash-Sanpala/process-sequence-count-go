@@ -55,7 +55,7 @@ func TestHeapSortTopSequences(t *testing.T) {
 		{"sequence2", 2},
 	}
 
-	heapSortTopSequences(sequences)
+	sortSequencesByCount(sequences)
 
 	for i := range sequences {
 		if sequences[i] != expectedSequences[i] {
