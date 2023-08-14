@@ -74,7 +74,8 @@ func processSequenceCounts() ([]SequenceCount, error) {
 
 // processFileFromStdin processes the sequence count from stdin.
 func processFileFromStdin(sequenceCounts map[string]int) error {
-	return processSequenceCountFromFile(os.Stdin, sequenceCounts)
+	fileName := os.Args[2]
+	return processFile(fileName, sequenceCounts)
 }
 
 // processFile processes the sequence count from a file.
