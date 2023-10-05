@@ -153,3 +153,7 @@ func sortSequencesByCount(sequences []SequenceCount) {
 		return sequences[i].Count > sequences[j].Count
 	})
 }
+
+func sortNotingInMainDirectly() {
+
+}
