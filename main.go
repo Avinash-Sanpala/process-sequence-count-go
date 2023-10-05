@@ -148,6 +148,7 @@ func isFileFromStdin() bool {
 }
 
 // sortSequencesByCount gets all the sequences sorted by count in descending order
+// ths is to mock and test conflict issue. these changes are directly pushed to master
 func sortSequencesByCount(sequences []SequenceCount) {
 	sort.Slice(sequences, func(i, j int) bool {
 		return sequences[i].Count > sequences[j].Count
