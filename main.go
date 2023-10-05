@@ -147,6 +147,7 @@ func isFileFromStdin() bool {
 	return false
 }
 
+// ths is to mock and test conflict issue. these changes are pushed to feature
 // sortSequencesByCount gets all the sequences sorted by count in descending order
 // ths is to mock and test conflict issue. these changes are directly pushed to master
 func sortSequencesByCount(sequences []SequenceCount) {
